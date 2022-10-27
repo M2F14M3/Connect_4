@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Connect 4</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/style.css">
+    </head>
+    <body>
+        <center>
+            <p>
+                Player 1: {{ session.get("player1") }} with red tokens<br />
+                Player 2: {{ session.get("player2") }} with yellow tokens<br />
+                <h1>{% if session.get("turn") == session.get("tokenPlayer1") %}{{ session.get("player1") + " (Red) turn" }}{% else %}{{ session.get("player2") + " (Yellow) turn" }}{% endif %}</h1>
+            </p>
+            <table border="1">
+                <form action="move" method="POST">
+                    <tr>
+                        {% if session.get("endGame") == "N" %}
+                            {% for col in range(session.get("num_columns")) %}
+                                <td>
+                                    <input type="submit" value="{{ col + 1 }}" name="move" />
+                                </td>
+                            {% endfor %}
+                        {% else %}
+                            {% for col in range(session.get("num_columns")) %}
+                                <td>
+                                    <input type="submit" value="{{ col + 1 }}" name="move" disabled />
+                                </td>
+                            {% endfor %}
+                        {% endif %}
+                    </tr>
+                </form>
+                {% for row in range(session.get("num_rows")) %}
+                    <tr>
+                        {% for col in range(session.get("num_columns")) %}
+                            {% if session.get("matrix")[row][col] == "W" %}
+                                <td class="white">
+                            {% elif session.get("matrix")[row][col] == "R" %}
+                                <td class="red">
+                            {% else %}
+                                <td class="yellow">
+                            {% endif %}                 
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            <div>
+                {{ session.get("message") | safe }}
+            <div>
+        </center>
+    </body>
+</html>

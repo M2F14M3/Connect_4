@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+}
+
+body {
+    display: block;
+}
+
+p {
+    width: 100vw;
+}
+
+table,
+tr,
+td,
+#button {
+    width: 80vw;
+    height: 5vh;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    height: 100%;
+}
+
+.white {
+    background-color: #ffffff;
+}
+
+.yellow {
+    background-color: #ffff00;
+}
+
+.red {
+    background-color: #ff0000;
+}
